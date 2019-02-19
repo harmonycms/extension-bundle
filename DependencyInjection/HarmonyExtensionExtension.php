@@ -2,6 +2,7 @@
 
 namespace Harmony\Bundle\ExtensionBundle\DependencyInjection;
 
+use Harmony\Sdk\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 
@@ -24,6 +25,12 @@ class HarmonyExtensionExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-
+        $twigFilesystemLoaderDefinition = $container->getDefinition('twig.loader.filesystem');
+        // register extensions as Twig namespaces
+        foreach ($container->getParameter('kernel.extensions') as $namespace => $class) {
+            /** @var ExtensionInterface $extensionClass */
+            $extensionClass = new $class();
+            $twigFilesystemLoaderDefinition->addMethodCall('addPath', [$extensionClass->getPath(), $namespace]);
+        }
     }
 }
