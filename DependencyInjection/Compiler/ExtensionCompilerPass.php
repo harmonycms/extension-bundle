@@ -26,7 +26,9 @@ class ExtensionCompilerPass implements CompilerPassInterface
         foreach ($container->getParameter('kernel.extensions') as $namespace => $class) {
             /** @var ExtensionInterface $extensionClass */
             $extensionClass = new $class();
-            $twigFilesystemLoaderDefinition->addMethodCall('addPath', [$extensionClass->getPath(), $namespace]);
+            if (\is_dir($path = $extensionClass->getPath() . '/Resources/views')) {
+                $twigFilesystemLoaderDefinition->addMethodCall('addPath', [$path, $namespace]);
+            }
         }
     }
 }
