@@ -60,7 +60,7 @@ class ExtensionCompilerPass implements CompilerPassInterface
                 $files[$locale][] = (string)$file;
             }
 
-            $options = array_merge($translatorDefinition->getArgument(4), ['resource_files' => $files]);
+            $options = array_merge_recursive($translatorDefinition->getArgument(4), ['resource_files' => $files]);
 
             $translatorDefinition->replaceArgument(4, $options);
         }
