@@ -2,10 +2,12 @@
 
 namespace Harmony\Bundle\ExtensionBundle\DependencyInjection;
 
+use Harmony\Bundle\ExtensionBundle\Translation\Translator;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class HarmonyExtensionExtension
@@ -28,5 +30,12 @@ class HarmonyExtensionExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(dirname(__DIR__) . '/Resources/config'));
         $loader->load('services.yaml');
+
+        $translator = $container->register(Translator::class, Translator::class);
+        $translator->setArgument('$translator', new Reference('translator.default'));
+        $translator->setDecoratedService('translator', null, 5);
+        $translator->addMethodCall('addExtensionResources', [
+            '$extensionsMetadata' => $container->getParameter('kernel.extensions_metadata')
+        ]);
     }
 }
