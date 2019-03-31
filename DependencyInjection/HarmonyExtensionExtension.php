@@ -32,7 +32,7 @@ class HarmonyExtensionExtension extends Extension
         $loader->load('services.yaml');
 
         $translator = $container->register(Translator::class, Translator::class);
-        $translator->setArgument('$translator', new Reference('translator.default'));
+        $translator->setArgument('$translator', new Reference(Translator::class . '.inner'));
         $translator->setDecoratedService('translator', null, 5);
         $translator->addMethodCall('addExtensionResources', [
             '$extensionsMetadata' => $container->getParameter('kernel.extensions_metadata')
