@@ -31,6 +31,7 @@ class HarmonyExtensionExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(dirname(__DIR__) . '/Resources/config'));
         $loader->load('services.yaml');
 
+        // Register translation path for each extensions
         $translator = $container->register(Translator::class, Translator::class);
         $translator->setArgument('$translator', new Reference(Translator::class . '.inner'));
         $translator->setDecoratedService('translator', null, 5);
