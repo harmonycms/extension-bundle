@@ -1,7 +1,9 @@
 services:
-  _defaults:
-    public: false
-    autowire: true
-    autoconfigure: true
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
 
-  Harmony\Bundle\ExtensionBundle\Command\AssetsInstallCommand: ~
+    Harmony\Bundle\ExtensionBundle\Command\AssetsInstallCommand: ~
+
+    Harmony\Bundle\ExtensionBundle\Manager\Component: ~
