@@ -2,8 +2,10 @@
 
 namespace Harmony\Bundle\ExtensionBundle\Manager;
 
+use Harmony\Bundle\CoreBundle\Component\HttpKernel\AbstractKernel;
 use Harmony\Sdk\Extension\AbstractExtension;
 use Harmony\Sdk\Extension\Component;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class Component
@@ -15,6 +17,18 @@ class ComponentManager
 
     /** @var Component[] $components */
     protected $components = [];
+
+    /**
+     * ComponentManager constructor.
+     *
+     * @param KernelInterface|AbstractKernel $kernel
+     */
+    public function __construct(KernelInterface $kernel)
+    {
+        foreach ($kernel->getComponents() as $name => $component) {
+            $this->add($component);
+        }
+    }
 
     /**
      * Add component to manager
