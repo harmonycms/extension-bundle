@@ -6,4 +6,4 @@ services:
 
     Harmony\Bundle\ExtensionBundle\Command\AssetsInstallCommand: ~
 
-    Harmony\Bundle\ExtensionBundle\Manager\Component: ~
+    Harmony\Bundle\ExtensionBundle\Manager\ComponentManager: ~
