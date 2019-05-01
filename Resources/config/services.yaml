@@ -5,5 +5,3 @@ services:
         autoconfigure: true
 
     Harmony\Bundle\ExtensionBundle\Command\AssetsInstallCommand: ~
-
-    Harmony\Bundle\ExtensionBundle\Manager\ComponentManager: ~
