@@ -67,7 +67,8 @@ class HarmonyExtensionExtension extends Extension implements PrependExtensionInt
                 $settings[$type] = [
                     'name'    => $type,
                     'type'    => 'choice',
-                    'tags'    => ['extensions'],
+                    'domain'  => 'extension',
+                    'tags'    => ['components'],
                     'choices' => $metaTypes[$type]
                 ];
             }
