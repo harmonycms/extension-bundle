@@ -14,19 +14,6 @@ use Twig\TwigFunction;
 class Extension extends AbstractExtension
 {
 
-    /** @var SettingsManager $settingsManager */
-    protected $settingsManager;
-
-    /**
-     * Extension constructor.
-     *
-     * @param SettingsManager $settingsManager
-     */
-    public function __construct(SettingsManager $settingsManager)
-    {
-        $this->settingsManager = $settingsManager;
-    }
-
     /**
      * Returns a list of functions to add to the existing list.
      *
@@ -44,7 +31,8 @@ class Extension extends AbstractExtension
      */
     public function getComponent(string $type)
     {
-        return $this->settingsManager->getSetting($type, 'extension')->getData();
+        return null;
+        // return $this->settingsManager->getSetting($type, 'extension')->getData();
     }
 
 }
